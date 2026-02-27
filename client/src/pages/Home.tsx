@@ -64,10 +64,10 @@ export default function Home() {
             </p>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-white">
-            Para el Dueño de Negocio que Quiere Dominar su Mercado y el Emprendedor que Planea Robárselo...
+            Domina la Inteligencia Artificial y Reemplaza 10 Empleados con Plugins de IA
           </h1>
           <p className="text-xl md:text-2xl text-gray-200 mb-8 font-light">
-            Aquí Está el Arma Secreta que Ambos Necesitan: Domina la Inteligencia Artificial en una Sola Tarde.
+            Aprende a usar Inteligencia Artificial para automatizar Ventas, Marketing, Finanzas, Atención al Cliente y más. Todo en una sola tarde.
           </p>
           <div className="flex gap-4">
             <a href="#form" className="inline-block">
@@ -117,43 +117,85 @@ export default function Home() {
           <div className="mb-12 bg-white border border-border p-8">
             <h2 className="text-2xl font-bold mb-6">Tu Curso de Inteligencia Artificial: De Cero a Experto en Una Tarde</h2>
             <p className="text-lg leading-relaxed mb-6">
-              Este es un curso intensivo de Inteligencia Artificial diseñado para llevarte desde el nivel <strong>Inicio</strong> (sin experiencia previa) hasta el nivel <strong>Avanzado</strong> (implementación inmediata en tu negocio). En solo 4 horas, aprenderás a dominar las herramientas de Inteligencia Artificial que están transformando industrias.
+              Este es un curso intensivo de Inteligencia Artificial diseñado para llevarte desde el nivel <strong>Inicio</strong> (sin experiencia previa) hasta el nivel <strong>Avanzado</strong> (implementación inmediata en tu negocio). En solo 4 horas, aprenderás a dominar los plugins de Inteligencia Artificial que están transformando industrias.
             </p>
             <p className="text-lg leading-relaxed">
               No necesitas ser un experto en tecnología. Este curso de Inteligencia Artificial está diseñado para profesionales ambiciosos que quieren resultados tangibles, no teoría aburrida.
             </p>
           </div>
 
-          {/* What You'll Get */}
+          {/* AI Plugins Section */}
           <div className="mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">Saldrá de este Curso de Inteligencia Artificial con un Arsenal para:</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-8">Los 10 Plugins de Inteligencia Artificial que Reemplazarán Empleados en tu Negocio</h2>
             
             <div className="space-y-8">
               <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-bold mb-2">Construir su "Ejército de Inteligencia Artificial de un Solo Hombre"</h3>
+                <h3 className="text-xl font-bold mb-2">1. Plugin de Productividad de IA</h3>
                 <p className="text-lg leading-relaxed">
-                  Cómo usar Inteligencia Artificial para automatizar ventas, marketing, servicio al cliente y operaciones, permitiéndole (como emprendedor) competir con gigantes o (como dueño) liberar a su equipo para tareas de alto valor.
+                  Reemplaza a tu asistente personal. Automatiza tareas, gestiona calendarios, organiza flujos de trabajo y elimina el 80% del trabajo administrativo que consume tu tiempo.
                 </p>
               </div>
 
               <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-bold mb-2">El Sistema "Claridad Instantánea" Potenciado por Inteligencia Artificial</h3>
+                <h3 className="text-xl font-bold mb-2">2. Plugin de Búsqueda Empresarial de IA</h3>
                 <p className="text-lg leading-relaxed">
-                  Transforme el caos de sus datos en un simple panel de control impulsado por Inteligencia Artificial que le grita dónde está el dinero, dónde lo está perdiendo y qué hacer a continuación.
+                  Reemplaza a tu investigador. Encuentra información crítica en segundos dentro de todos tus documentos, correos y sistemas. Es como tener un motor de búsqueda personal para tu empresa.
                 </p>
               </div>
 
               <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-bold mb-2">La "Máquina de Contenido Persuasivo" Impulsada por Inteligencia Artificial</h3>
+                <h3 className="text-xl font-bold mb-2">3. Plugin de Ventas de IA</h3>
                 <p className="text-lg leading-relaxed">
-                  Genere en minutos todos los textos, correos, guiones y anuncios que necesita usando Inteligencia Artificial, con un poder de conversión que dejará en ridículo a la mayoría de las agencias de marketing.
+                  Reemplaza a tu gerente de ventas. Investiga prospectos, prepara resúmenes de clientes, automatiza seguimientos y cierra más tratos sin que tengas que hacer el trabajo manual.
                 </p>
               </div>
 
               <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-bold mb-2">El "Detector de Futuro" Basado en Inteligencia Artificial</h3>
+                <h3 className="text-xl font-bold mb-2">4. Plugin de Finanzas de IA</h3>
                 <p className="text-lg leading-relaxed">
-                  Utilice modelos de Inteligencia Artificial para anticipar las necesidades de sus clientes y las tendencias del mercado. Deje de seguir al mercado; póngase al frente de él.
+                  Reemplaza a tu analista financiero. Analiza estados financieros, crea modelos predictivos, identifica oportunidades de ahorro y monitorea métricas clave en tiempo real.
+                </p>
+              </div>
+
+              <div className="border-l-4 border-primary pl-6">
+                <h3 className="text-xl font-bold mb-2">5. Plugin de Datos de IA</h3>
+                <p className="text-lg leading-relaxed">
+                  Reemplaza a tu científico de datos. Consulta, visualiza e interpreta grandes volúmenes de datos complejos. Descubre patrones y tendencias ocultas en minutos, no en semanas.
+                </p>
+              </div>
+
+              <div className="border-l-4 border-primary pl-6">
+                <h3 className="text-xl font-bold mb-2">6. Plugin Legal de IA</h3>
+                <p className="text-lg leading-relaxed">
+                  Reemplaza a tu asesor legal junior. Revisa contratos, identifica riesgos legales, asegura cumplimiento normativo y te ahorra miles en honorarios de abogados.
+                </p>
+              </div>
+
+              <div className="border-l-4 border-primary pl-6">
+                <h3 className="text-xl font-bold mb-2">7. Plugin de Marketing de IA</h3>
+                <p className="text-lg leading-relaxed">
+                  Reemplaza a tu agencia de marketing. Genera ideas de campañas, redacta contenido persuasivo, planifica lanzamientos y crea estrategias que convierten en horas, no en semanas.
+                </p>
+              </div>
+
+              <div className="border-l-4 border-primary pl-6">
+                <h3 className="text-xl font-bold mb-2">8. Plugin de Atención al Cliente de IA</h3>
+                <p className="text-lg leading-relaxed">
+                  Reemplaza a tu equipo de soporte. Clasifica problemas, redacta respuestas personalizadas, propone soluciones y resuelve tickets 10 veces más rápido que un humano.
+                </p>
+              </div>
+
+              <div className="border-l-4 border-primary pl-6">
+                <h3 className="text-xl font-bold mb-2">9. Plugin de Gestión de Productos de IA</h3>
+                <p className="text-lg leading-relaxed">
+                  Reemplaza a tu product manager. Define especificaciones, prioriza funcionalidades, crea roadmaps estratégicos y asegura que cada lanzamiento sea un éxito.
+                </p>
+              </div>
+
+              <div className="border-l-4 border-primary pl-6">
+                <h3 className="text-xl font-bold mb-2">10. Plugin de Investigación Científica de IA</h3>
+                <p className="text-lg leading-relaxed">
+                  Reemplaza a tu investigador académico. Busca en miles de artículos científicos, analiza resultados de experimentos y planifica los próximos pasos de tu investigación en minutos.
                 </p>
               </div>
             </div>
@@ -168,7 +210,7 @@ export default function Home() {
               <div className="bg-white border border-border p-6">
                 <h3 className="text-2xl font-bold mb-4 text-primary">Nivel Inicio</h3>
                 <p className="text-lg leading-relaxed">
-                  Aprenderás los fundamentos de Inteligencia Artificial, cómo funciona, y cómo empezar a usarla sin experiencia técnica previa. Perfecto si es tu primer contacto con estas herramientas.
+                  Aprenderás los fundamentos de Inteligencia Artificial, cómo funcionan los plugins, y cómo empezar a usarlos sin experiencia técnica previa. Perfecto si es tu primer contacto con estas herramientas.
                 </p>
               </div>
               <div className="bg-white border border-border p-6">
@@ -198,6 +240,7 @@ export default function Home() {
             <h2 className="text-2xl font-bold mb-6">El Curso Intensivo de Inteligencia Artificial "IA para Conquistadores"</h2>
             <div className="space-y-4 text-lg">
               <p><strong>Tipo:</strong> Curso Intensivo de Inteligencia Artificial (Inicio a Avanzado)</p>
+              <p><strong>Contenido:</strong> 10 Plugins de Inteligencia Artificial que reemplazan empleados en tu negocio</p>
               <p><strong>Fecha:</strong> Miércoles (la fecha exacta se revelará solo a la lista prioritaria).</p>
               <p><strong>Horario:</strong> 4:00 PM a 8:00 PM. Inmersión total en Inteligencia Artificial.</p>
               <p><strong>Ubicación:</strong> Un lugar privado y céntrico en Quito, lejos de las multitudes.</p>
