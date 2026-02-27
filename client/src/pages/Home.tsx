@@ -64,7 +64,7 @@ export default function Home() {
             </p>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-white">
-            Domina la Inteligencia Artificial y Llévate 10 Programas Listos para Usar en tu Computadora
+            Domina la Inteligencia Artificial en una Tarde
           </h1>
           <p className="text-xl md:text-2xl text-gray-200 mb-8 font-light">
             Aprende a usar Inteligencia Artificial para automatizar Ventas, Marketing, Finanzas, Atención al Cliente y más. Todo en una sola tarde.
