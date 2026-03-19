@@ -1,48 +1,82 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { toast } from "sonner";
 
 export default function Home() {
-  const [formData, setFormData] = useState({
-    nombre: "",
-    email: "",
-    rol: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const whatsappNumber = "593981872561";
+  const whatsappMessage = "Hola, me interesa el curso intensivo de Inteligencia Artificial. Quiero más información.";
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  const [countdown, setCountdown] = useState("");
 
-  const handleRoleChange = (value: string) => {
-    setFormData((prev) => ({ ...prev, rol: value }));
-  };
+  // Define phase dates
+  const phase1Start = new Date(2026, 2, 17); // March 17, 2026
+  const phase1End = new Date(2026, 2, 24); // March 24, 2026
+  const phase2Start = new Date(2026, 2, 25); // March 25, 2026
+  const phase2End = new Date(2026, 3, 1); // April 1, 2026
+  const phase3Start = new Date(2026, 3, 2); // April 2, 2026
+  const phase3End = new Date(2026, 3, 8); // April 8, 2026
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    
-    if (!formData.nombre || !formData.email || !formData.rol) {
-      toast.error("Por favor completa todos los campos");
-      return;
-    }
+  const today = new Date(2026, 2, 17); // March 17, 2026
 
-    setIsSubmitting(true);
-    
-    try {
-      // Simulate form submission
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+  let currentPhase = 1;
+  let price = 239;
+  let discount = "20%";
+  let phaseName = "Fase 1: Descuento Especial";
+  let paymentLink = "https://ppls.me/7Ofge5FRKfZUVrFvYxAZCw";
+  let phaseEnd = phase1End;
+  let isPhaseActive = true;
+
+  // Determine current phase
+  if (today >= phase1Start && today <= phase1End) {
+    currentPhase = 1;
+    price = 239;
+    discount = "20%";
+    phaseName = "Fase 1: Descuento Especial";
+    paymentLink = "https://ppls.me/7Ofge5FRKfZUVrFvYxAZCw";
+    phaseEnd = phase1End;
+    isPhaseActive = true;
+  } else if (today >= phase2Start && today <= phase2End) {
+    currentPhase = 2;
+    price = 269;
+    discount = "10%";
+    phaseName = "Fase 2: Descuento Limitado";
+    paymentLink = "https://ppls.me/glWw1cfI1R1iMmQSboCFw";
+    phaseEnd = phase2End;
+    isPhaseActive = true;
+  } else if (today >= phase3Start && today <= phase3End) {
+    currentPhase = 3;
+    price = 299;
+    discount = "Sin descuento";
+    phaseName = "Fase 3: Precio Regular";
+    paymentLink = "https://ppls.me/xxLHrw1kbkq1tsdueFvvHw";
+    phaseEnd = phase3End;
+    isPhaseActive = true;
+  } else {
+    isPhaseActive = false;
+  }
+
+  // Countdown effect
+  useEffect(() => {
+    const updateCountdown = () => {
+      const now = new Date(2026, 2, 17); // Use fixed date for demo
+      const diff = phaseEnd.getTime() - now.getTime();
       
-      toast.success("¡Gracias! Te hemos añadido a la lista prioritaria. Recibirás un email pronto.");
-      setFormData({ nombre: "", email: "", rol: "" });
-    } catch (error) {
-      toast.error("Hubo un error. Intenta de nuevo.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+      if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        
+        setCountdown(`${days}d ${hours}h ${minutes}m ${seconds}s`);
+      } else {
+        setCountdown("Fase terminada");
+      }
+    };
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+    return () => clearInterval(interval);
+  }, [phaseEnd]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -66,278 +100,281 @@ export default function Home() {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-white">
             Domina la Inteligencia Artificial en una Tarde
           </h1>
+          
+          {/* Date and Location */}
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 mb-8">
+            <div className="space-y-3 text-white">
+              <div className="flex items-start gap-3">
+                <svg className="w-6 h-6 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                </svg>
+                <div>
+                  <p className="font-bold text-lg">Miércoles, 8 de Abril 2026</p>
+                  <p className="text-sm text-gray-100">4:00 PM - 8:00 PM</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <svg className="w-6 h-6 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C7.58 2 4 5.58 4 10c0 5.25 8 13 8 13s8-7.75 8-13c0-4.42-3.58-8-8-8zm0 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/>
+                </svg>
+                <div>
+                  <p className="font-bold text-lg">Club la Unión</p>
+                  <p className="text-sm text-gray-100">Quito, Ecuador</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 pt-2 border-t border-white/20">
+                <svg className="w-6 h-6 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+                </svg>
+                <div>
+                  <p className="font-bold text-lg">Código de Vestimenta</p>
+                  <p className="text-sm text-gray-100">Smart Casual (Requerido por Club la Unión)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Pricing Tier Display */}
+          <div className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black p-6 rounded-lg mb-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <div>
+                <p className="text-sm font-bold uppercase tracking-wider">Precio Actual</p>
+                <p className="text-3xl md:text-4xl font-bold">${price}</p>
+                <p className="text-sm font-semibold mt-1">{phaseName}</p>
+              </div>
+              <div className="text-right">
+                <p className="text-2xl font-bold">{discount}</p>
+                <p className="text-sm font-semibold">Descuento</p>
+                <p className="text-xs mt-2 font-mono bg-black/20 px-2 py-1 rounded">{countdown}</p>
+              </div>
+            </div>
+          </div>
+          
           <p className="text-xl md:text-2xl text-gray-200 mb-8 font-light">
             Aprende a usar Inteligencia Artificial para automatizar Ventas, Marketing, Finanzas, Atención al Cliente y más. Todo en una sola tarde.
           </p>
-          <div className="flex gap-4">
-            <a href="#form" className="inline-block">
-              <Button size="lg" className="bg-primary hover:bg-red-700 text-white text-lg px-8 py-6">
-                Asegurar mi Lugar
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a href="#payment" className="inline-block">
+              <Button size="lg" className="bg-primary hover:bg-red-700 text-white text-lg px-8 py-6 w-full sm:w-auto">
+                Asegurar mi Lugar - ${price}
+              </Button>
+            </a>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-block">
+              <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white text-lg px-8 py-6 flex items-center gap-2 w-full sm:w-auto justify-center">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.869 1.171c-1.519.754-2.753 1.77-3.68 3.02C2.957 10.487 2.5 12.05 2.5 13.682c0 1.81.424 3.589 1.223 5.192l-1.313 4.805 4.945-1.297c1.524.923 3.32 1.411 5.204 1.411 5.414 0 9.776-4.363 9.776-9.776 0-2.606-.997-5.054-2.782-6.898-1.784-1.844-4.232-2.859-6.816-2.859"/>
+                </svg>
+                ¿Preguntas?
               </Button>
             </a>
           </div>
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="bg-background py-16 md:py-24 px-4 md:px-8">
+      {/* What You'll Learn Section */}
+      <section className="py-16 md:py-24 px-4 md:px-8 bg-white">
         <div className="max-w-4xl mx-auto">
-          {/* Opening */}
-          <div className="mb-12">
-            <p className="text-lg md:text-xl leading-relaxed mb-6">
-              <strong>Amigo/a Emprendedor/a,</strong>
-            </p>
-            <p className="text-lg md:text-xl leading-relaxed mb-6">
-              Seamos directos. Ya sea que estés defendiendo un imperio o construyendo uno desde los cimientos, solo hay una cosa que importa: <strong>la velocidad de ejecución inteligente con Inteligencia Artificial.</strong>
-            </p>
-            <p className="text-lg md:text-xl leading-relaxed mb-6">
-              El que aprende más rápido a usar Inteligencia Artificial, se adapta más rápido y actúa más rápido, <strong>GANA.</strong> El resto se convierte en una anécdota.
-            </p>
-          </div>
-
-          <div className="section-divider"></div>
-
-          {/* The Threat */}
-          <div className="mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">La Realidad que Nadie Quiere Admitir Sobre la Inteligencia Artificial</h2>
-            <p className="text-lg md:text-xl leading-relaxed mb-6">
-              Durante años, la ventaja la tenían los que poseían más capital, más personal o más tiempo en el mercado. <strong>Esa era ha terminado.</strong>
-            </p>
-            <p className="text-lg md:text-xl leading-relaxed mb-6">
-              Hoy, una nueva fuerza está nivelando el campo de juego de la manera más brutal posible. Se llama <strong>Inteligencia Artificial.</strong> Y no, no es el juguete tecnológico del que hablan los "gurús". Es una herramienta de <strong>apalancamiento puro.</strong>
-            </p>
-            <p className="text-lg md:text-xl leading-relaxed">
-              Mientras usted lee esto, alguien en su industria (quizás un competidor directo, quizás un novato ambicioso en un garaje) está usando Inteligencia Artificial para generar clientes, descubrir oportunidades y tomar decisiones estratégicas basadas en datos puros.
-            </p>
-          </div>
-
-          <div className="section-divider"></div>
-
-          {/* Course Overview */}
-          <div className="mb-12 bg-white border border-border p-8">
-            <h2 className="text-2xl font-bold mb-6">Tu Curso de Inteligencia Artificial: De Cero a Experto en Una Tarde</h2>
-            <p className="text-lg leading-relaxed mb-6">
-              Este es un curso intensivo de Inteligencia Artificial diseñado para llevarte desde el nivel <strong>Inicio</strong> (sin experiencia previa) hasta el nivel <strong>Avanzado</strong> (implementación inmediata en tu negocio). En solo 4 horas, aprenderás a dominar la Inteligencia Artificial y te llevarás 10 programas listos para usar en tu computadora.
-            </p>
-            <p className="text-lg leading-relaxed">
-              No necesitas ser un experto en tecnología. Este curso de Inteligencia Artificial está diseñado para profesionales ambiciosos que quieren resultados tangibles, no teoría aburrida. <strong>Al terminar el curso, tendrás en tu computadora todos los programas que necesitas para automatizar tu negocio.</strong>
-            </p>
-          </div>
-
-          {/* AI Programs Section */}
-          <div className="mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">Los 10 Programas de Inteligencia Artificial que Saldrán en tu Computadora</h2>
-            <p className="text-lg leading-relaxed mb-8 italic text-gray-700">
-              Después del curso, tendrás instalados y listos para usar en tu computadora estos programas de Inteligencia Artificial para:
-            </p>
-            
-            <div className="space-y-8">
-              <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-bold mb-2">1. Automatizar tu Productividad y Gestión Administrativa</h3>
-                <p className="text-lg leading-relaxed">
-                  Reemplaza a tu asistente personal. Automatiza tareas, gestiona calendarios, organiza flujos de trabajo y elimina el 80% del trabajo administrativo que consume tu tiempo. Todo desde tu computadora.
-                </p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Saldrá de esta Sala de Guerra con un Arsenal para:</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="flex gap-4">
+              <div className="flex-shrink-0">
+                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
+                  <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
               </div>
-
-              <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-bold mb-2">2. Buscar Información Crítica en Segundos</h3>
-                <p className="text-lg leading-relaxed">
-                  Reemplaza a tu investigador. Encuentra información crítica en segundos dentro de todos tus documentos, correos y sistemas. Es como tener un motor de búsqueda personal para tu empresa en tu computadora.
-                </p>
+              <div>
+                <h3 className="text-xl font-bold mb-2">Construir su "Ejército de un Solo Hombre"</h3>
+                <p className="text-gray-600">Cómo usar Inteligencia Artificial para automatizar ventas, marketing, servicio al cliente y operaciones, permitiéndole competir con gigantes o liberar tiempo para lo que realmente importa.</p>
               </div>
+            </div>
 
-              <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-bold mb-2">3. Generar y Cerrar Más Ventas Automáticamente</h3>
-                <p className="text-lg leading-relaxed">
-                  Reemplaza a tu gerente de ventas. Investiga prospectos, prepara resúmenes de clientes, automatiza seguimientos y cierra más tratos sin que tengas que hacer el trabajo manual. El programa hace el trabajo por ti.
-                </p>
+            <div className="flex gap-4">
+              <div className="flex-shrink-0">
+                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
+                  <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
               </div>
-
-              <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-bold mb-2">4. Analizar Finanzas y Tomar Decisiones Estratégicas</h3>
-                <p className="text-lg leading-relaxed">
-                  Reemplaza a tu analista financiero. Analiza estados financieros, crea modelos predictivos, identifica oportunidades de ahorro y monitorea métricas clave en tiempo real desde tu computadora.
-                </p>
+              <div>
+                <h3 className="text-xl font-bold mb-2">Multiplicar Ingresos sin Multiplicar Esfuerzo</h3>
+                <p className="text-gray-600">Implementar sistemas de Inteligencia Artificial que generan leads, cierran ventas y escalan su negocio mientras usted duerme.</p>
               </div>
+            </div>
 
-              <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-bold mb-2">5. Interpretar Datos Complejos en Minutos</h3>
-                <p className="text-lg leading-relaxed">
-                  Reemplaza a tu científico de datos. Consulta, visualiza e interpreta grandes volúmenes de datos complejos. Descubre patrones y tendencias ocultas en minutos, no en semanas. Todo procesado en tu computadora.
-                </p>
+            <div className="flex gap-4">
+              <div className="flex-shrink-0">
+                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
+                  <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
               </div>
-
-              <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-bold mb-2">6. Revisar Contratos y Asegurar Cumplimiento Legal</h3>
-                <p className="text-lg leading-relaxed">
-                  Reemplaza a tu asesor legal junior. Revisa contratos, identifica riesgos legales, asegura cumplimiento normativo y te ahorra miles en honorarios de abogados. El programa revisa todo por ti.
-                </p>
+              <div>
+                <h3 className="text-xl font-bold mb-2">Reducir Costos Operacionales Drásticamente</h3>
+                <p className="text-gray-600">Reemplazar empleados costosos con programas de Inteligencia Artificial que trabajan 24/7 sin vacaciones, enfermedades ni demandas laborales.</p>
               </div>
+            </div>
 
-              <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-bold mb-2">7. Crear Contenido de Marketing que Vende</h3>
-                <p className="text-lg leading-relaxed">
-                  Reemplaza a tu agencia de marketing. Genera ideas de campañas, redacta contenido persuasivo, planifica lanzamientos y crea estrategias que convierten en horas, no en semanas. Todo desde tu computadora.
-                </p>
+            <div className="flex gap-4">
+              <div className="flex-shrink-0">
+                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
+                  <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
               </div>
-
-              <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-bold mb-2">8. Atender Clientes 24/7 Sin Estar Presente</h3>
-                <p className="text-lg leading-relaxed">
-                  Reemplaza a tu equipo de soporte. Clasifica problemas, redacta respuestas personalizadas, propone soluciones y resuelve tickets 10 veces más rápido que un humano. El programa trabaja mientras duermes.
-                </p>
-              </div>
-
-              <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-bold mb-2">9. Planificar Productos y Lanzamientos Estratégicos</h3>
-                <p className="text-lg leading-relaxed">
-                  Reemplaza a tu product manager. Define especificaciones, prioriza funcionalidades, crea roadmaps estratégicos y asegura que cada lanzamiento sea un éxito. Todo coordinado desde tu computadora.
-                </p>
-              </div>
-
-              <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-bold mb-2">10. Investigar y Descubrir Nuevas Oportunidades</h3>
-                <p className="text-lg leading-relaxed">
-                  Reemplaza a tu investigador académico o de mercado. Busca en miles de fuentes, analiza tendencias, identifica oportunidades y planifica los próximos pasos de tu negocio en minutos. El programa investiga por ti.
-                </p>
+              <div>
+                <h3 className="text-xl font-bold mb-2">Dominar 10 Programas de Inteligencia Artificial</h3>
+                <p className="text-gray-600">Instalar y usar herramientas de IA para Productividad, Ventas, Marketing, Finanzas, Atención al Cliente, Análisis de Datos y más.</p>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="bg-red-50 border-2 border-primary p-8 my-12">
-            <h3 className="text-2xl font-bold mb-4 text-primary">Lo Mejor: Todos Estos Programas Estarán en tu Computadora</h3>
-            <p className="text-lg leading-relaxed">
-              No necesitarás suscripciones costosas ni servicios en la nube. Al terminar el curso, tendrás instalados en tu computadora todos los programas de Inteligencia Artificial que necesitas. <strong>Son tuyos para siempre.</strong> Úsalos cuando quieras, cuantas veces quieras, sin límites.
-            </p>
-          </div>
-
-          <div className="section-divider"></div>
-
-          {/* Course Level */}
-          <div className="mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">Niveles del Curso de Inteligencia Artificial</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-white border border-border p-6">
-                <h3 className="text-2xl font-bold mb-4 text-primary">Nivel Inicio</h3>
-                <p className="text-lg leading-relaxed">
-                  Aprenderás los fundamentos de Inteligencia Artificial, cómo funcionan los programas, y cómo empezar a usarlos sin experiencia técnica previa. Perfecto si es tu primer contacto con estas herramientas.
-                </p>
+      {/* AI Programs Section */}
+      <section className="py-16 md:py-24 px-4 md:px-8 bg-gray-50">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Los 10 Programas de Inteligencia Artificial que Recibirá Instalados en su Computadora</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              { title: "Productividad", desc: "Automatice tareas, gestione proyectos y mejore la eficiencia" },
+              { title: "Búsqueda Empresarial", desc: "Investigue prospectos y competencia en segundos" },
+              { title: "Ventas", desc: "Genere leads, cierre deals y escale su pipeline de ventas" },
+              { title: "Finanzas", desc: "Analice números, cree modelos y tome decisiones basadas en datos" },
+              { title: "Datos", desc: "Visualice, interprete y extraiga insights de sus bases de datos" },
+              { title: "Legal", desc: "Revise documentos, identifique riesgos y cumpla regulaciones" },
+              { title: "Marketing", desc: "Cree campañas, redacte contenido y planifique lanzamientos" },
+              { title: "Atención al Cliente", desc: "Resuelva problemas 24/7 sin intervención humana" },
+              { title: "Gestión de Productos", desc: "Escriba especificaciones, priorice roadmaps y acelere desarrollo" },
+              { title: "Investigación Científica", desc: "Busque literatura, analice resultados y planifique experimentos" },
+            ].map((program, idx) => (
+              <div key={idx} className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h3 className="text-lg font-bold mb-2 text-primary">{program.title}</h3>
+                <p className="text-gray-600 text-sm">{program.desc}</p>
               </div>
-              <div className="bg-white border border-border p-6">
-                <h3 className="text-2xl font-bold mb-4 text-primary">Nivel Avanzado</h3>
-                <p className="text-lg leading-relaxed">
-                  Dominarás tácticas avanzadas de Inteligencia Artificial para automatizar procesos complejos, generar ingresos y crear ventajas competitivas que tus rivales no podrán igualar.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
+        </div>
+      </section>
 
-          <div className="section-divider"></div>
-
-          {/* Warning Box */}
-          <div className="bg-red-50 border-2 border-primary p-8 mb-12">
-            <h2 className="text-2xl font-bold mb-6 text-primary">Sea Advertido: La Exclusividad es Real</h2>
-            <p className="text-lg mb-4">Este curso intensivo de Inteligencia Artificial no es un evento masivo. Es para un grupo de élite.</p>
-            <ul className="space-y-3 text-lg">
-              <li>• Si busca una píldora mágica de Inteligencia Artificial, <strong>no es para usted.</strong></li>
-              <li>• Si cree que $299 es un "gasto" en lugar de una inversión minúscula en dominio de mercado con Inteligencia Artificial, <strong>no es para usted.</strong></li>
-              <li>• Si está satisfecho con su crecimiento actual y no tiene hambre de aprender Inteligencia Artificial, <strong>le ruego que no venga.</strong></li>
-            </ul>
-          </div>
-
-          {/* Event Details */}
-          <div className="bg-white border border-border p-8 mb-12">
-            <h2 className="text-2xl font-bold mb-6">El Curso Intensivo de Inteligencia Artificial "IA para Conquistadores"</h2>
-            <div className="space-y-4 text-lg">
-              <p><strong>Tipo:</strong> Curso Intensivo de Inteligencia Artificial (Inicio a Avanzado)</p>
-              <p><strong>Contenido:</strong> 10 Programas de Inteligencia Artificial instalados en tu computadora</p>
-              <p><strong>Fecha:</strong> Miércoles (la fecha exacta se revelará solo a la lista prioritaria).</p>
-              <p><strong>Horario:</strong> 4:00 PM a 8:00 PM. Inmersión total en Inteligencia Artificial.</p>
-              <p><strong>Ubicación:</strong> Un lugar privado y céntrico en Quito, lejos de las multitudes.</p>
-              <p><strong>Inversión en tu Dominio de Inteligencia Artificial:</strong> $299.</p>
-              <p><strong>Bonus:</strong> Todos los programas de IA listos para instalar en tu computadora al terminar el curso.</p>
-            </div>
-          </div>
-
-          <p className="text-lg md:text-xl leading-relaxed mb-12">
-            La ventana para ser un "early adopter" de Inteligencia Artificial y cosechar las mayores recompensas se está cerrando. Pronto, esto será el estándar, y los que no dominen Inteligencia Artificial, simplemente desaparecerán.
+      {/* Why This Matters Section */}
+      <section className="py-16 md:py-24 px-4 md:px-8 bg-white">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8">¿Por Qué Esto Importa AHORA?</h2>
+          <p className="text-xl text-gray-700 mb-8">
+            La Inteligencia Artificial no es el futuro. Es el presente. Y los que no se adapten ahora, quedarán obsoletos en 18 meses.
           </p>
-          <p className="text-2xl font-bold mb-12">
-            <strong>Asegure su lugar en la cima de la cadena alimenticia. Domine Inteligencia Artificial ahora.</strong>
+          <p className="text-lg text-gray-600 mb-8">
+            Este no es un seminario teórico. Es una sesión de guerra práctica donde saldrá con herramientas listas para usar, programas instalados en su computadora, y un plan de acción para implementar desde el lunes.
+          </p>
+          <p className="text-lg font-bold text-primary">
+            La pregunta no es si puede permitirse asistir. La pregunta es si puede permitirse NO asistir.
           </p>
         </div>
       </section>
 
-      {/* Form Section */}
-      <section id="form" className="bg-gray-100 py-16 md:py-24 px-4 md:px-8">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">Solicite su Acceso al Curso de Inteligencia Artificial</h2>
-          <p className="text-center text-lg mb-8 text-gray-700">
-            Es su única oportunidad de asegurar un asiento en este curso intensivo de Inteligencia Artificial antes de que se ofrezca al público general (si es que queda alguno).
+      {/* Contact Section */}
+      <section className="py-16 md:py-24 px-4 md:px-8 bg-white">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8">¿Tienes Preguntas?</h2>
+          <p className="text-xl text-gray-700 mb-8">
+            Contacta directamente por WhatsApp. Responderé personalmente tus dudas sobre el curso, el contenido, y cómo la Inteligencia Artificial puede transformar tu negocio.
           </p>
-
-          <form onSubmit={handleSubmit} className="bg-white p-8 shadow-lg space-y-6">
-            <div>
-              <label htmlFor="nombre" className="block text-sm font-semibold mb-2">
-                Nombre Completo
-              </label>
-              <Input
-                id="nombre"
-                name="nombre"
-                type="text"
-                placeholder="Tu nombre"
-                value={formData.nombre}
-                onChange={handleInputChange}
-                required
-                className="w-full px-4 py-3 border border-border rounded-none focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="email" className="block text-sm font-semibold mb-2">
-                Email Principal
-              </label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="tu@email.com"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-                className="w-full px-4 py-3 border border-border rounded-none focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="rol" className="block text-sm font-semibold mb-2">
-                Selecciona tu Rol
-              </label>
-              <Select value={formData.rol} onValueChange={handleRoleChange}>
-                <SelectTrigger className="w-full px-4 py-3 border border-border rounded-none focus:outline-none focus:ring-2 focus:ring-primary">
-                  <SelectValue placeholder="Selecciona tu rol..." />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Dueño de Negocio">Dueño de Negocio</SelectItem>
-                  <SelectItem value="Emprendedor">Emprendedor</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-primary hover:bg-red-700 text-white font-bold text-lg py-4 rounded-none uppercase tracking-wider"
-            >
-              {isSubmitting ? "Enviando..." : "QUIERO DOMINAR INTELIGENCIA ARTIFICIAL. AHORA."}
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-block">
+            <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white text-lg px-12 py-6 flex items-center gap-3 justify-center">
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.869 1.171c-1.519.754-2.753 1.77-3.68 3.02C2.957 10.487 2.5 12.05 2.5 13.682c0 1.81.424 3.589 1.223 5.192l-1.313 4.805 4.945-1.297c1.524.923 3.32 1.411 5.204 1.411 5.414 0 9.776-4.363 9.776-9.776 0-2.606-.997-5.054-2.782-6.898-1.784-1.844-4.232-2.859-6.816-2.859"/>
+              </svg>
+              Contactar por WhatsApp
             </Button>
-          </form>
+          </a>
+        </div>
+      </section>
 
-          <p className="text-center text-sm text-gray-600 mt-6 italic">
-            <strong>P.D.:</strong> En los negocios, o eres el disruptor que domina Inteligencia Artificial o eres el que sufre la disrupción de quienes sí la dominan. No hay término medio. Cada día que pospone aprender Inteligencia Artificial, le está dando munición a su enemigo. La elección es simple. Actúe.
+      {/* Payment Section */}
+      <section id="payment" className="bg-gray-100 py-16 md:py-24 px-4 md:px-8">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Asegura tu Lugar Ahora</h2>
+          <p className="text-lg md:text-xl mb-8 text-gray-700">
+            Solo 20 cupos disponibles. La inversión es <strong>${price}</strong> para acceso completo al curso intensivo de Inteligencia Artificial, incluyendo todos los programas instalados en tu computadora.
+          </p>
+          
+          {/* Pricing Tiers Info */}
+          <div className="bg-white p-8 rounded-lg shadow-md mb-8">
+            <h3 className="text-xl font-bold mb-6">Escala de Precios Dinámicos</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className={`p-4 rounded-lg ${currentPhase === 1 ? 'bg-yellow-100 border-2 border-yellow-400' : 'bg-gray-100'}`}>
+                <p className="font-bold mb-2">Fase 1</p>
+                <p className="text-2xl font-bold text-primary">$239</p>
+                <p className="text-sm text-gray-600">20% Descuento</p>
+                <p className="text-xs text-gray-500 mt-2">17-24 Marzo</p>
+                {currentPhase === 1 && <p className="text-xs font-bold text-green-600 mt-2">ACTIVA AHORA</p>}
+              </div>
+              <div className={`p-4 rounded-lg ${currentPhase === 2 ? 'bg-yellow-100 border-2 border-yellow-400' : 'bg-gray-100'}`}>
+                <p className="font-bold mb-2">Fase 2</p>
+                <p className="text-2xl font-bold text-primary">$269</p>
+                <p className="text-sm text-gray-600">10% Descuento</p>
+                <p className="text-xs text-gray-500 mt-2">25 Marzo - 1 Abril</p>
+                {currentPhase === 2 && <p className="text-xs font-bold text-green-600 mt-2">ACTIVA AHORA</p>}
+              </div>
+              <div className={`p-4 rounded-lg ${currentPhase === 3 ? 'bg-yellow-100 border-2 border-yellow-400' : 'bg-gray-100'}`}>
+                <p className="font-bold mb-2">Fase 3</p>
+                <p className="text-2xl font-bold text-primary">$299</p>
+                <p className="text-sm text-gray-600">Precio Regular</p>
+                <p className="text-xs text-gray-500 mt-2">2-8 Abril</p>
+                {currentPhase === 3 && <p className="text-xs font-bold text-green-600 mt-2">ACTIVA AHORA</p>}
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white p-8 rounded-lg shadow-md mb-8">
+            <h3 className="text-lg font-bold mb-6">Formas de Pago Disponibles</h3>
+            <div className="space-y-4">
+              <div>
+                <p className="text-sm text-gray-600 mb-3">Pago seguro a través de Payphone</p>
+                {isPhaseActive ? (
+                  <a href={paymentLink} target="_blank" rel="noopener noreferrer" className="inline-block">
+                    <Button size="lg" className="bg-primary hover:bg-red-700 text-white text-lg px-12 py-6">
+                      Pagar ${price} con Payphone
+                    </Button>
+                  </a>
+                ) : (
+                  <Button size="lg" disabled className="bg-gray-400 text-white text-lg px-12 py-6">
+                    Fase Terminada
+                  </Button>
+                )}
+              </div>
+              <div className="border-t pt-4">
+                <p className="text-sm text-gray-600 mb-3">¿Prefieres hablar primero?</p>
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-block">
+                  <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white text-lg px-12 py-6">
+                    Contactar por WhatsApp
+                  </Button>
+                </a>
+              </div>
+            </div>
+          </div>
+          <p className="text-sm text-gray-600">
+            Después de pagar, recibirás confirmación. Contacta por WhatsApp si tienes preguntas.
           </p>
         </div>
       </section>
+
+      {/* WhatsApp Floating Bubble */}
+      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="fixed bottom-6 right-6 z-50">
+        <div className="bg-green-600 hover:bg-green-700 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2">
+          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.869 1.171c-1.519.754-2.753 1.77-3.68 3.02C2.957 10.487 2.5 12.05 2.5 13.682c0 1.81.424 3.589 1.223 5.192l-1.313 4.805 4.945-1.297c1.524.923 3.32 1.411 5.204 1.411 5.414 0 9.776-4.363 9.776-9.776 0-2.606-.997-5.054-2.782-6.898-1.784-1.844-4.232-2.859-6.816-2.859"/>
+          </svg>
+          <span className="font-bold">¿Preguntas?</span>
+        </div>
+      </a>
     </div>
   );
 }
